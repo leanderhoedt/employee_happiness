@@ -99,3 +99,4 @@ fabric.properties
 
 /api/node_modules/
 /frontend/node_modules/
+/.idea/
