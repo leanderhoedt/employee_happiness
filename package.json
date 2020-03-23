@@ -1,15 +1,19 @@
 {
   "name": "employee_happiness",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "next": "9.3.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leanderhoedt/employee_happiness.git"
+  },
+  "author": "Leander Hoedt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leanderhoedt/employee_happiness/issues"
+  },
+  "homepage": "https://github.com/leanderhoedt/employee_happiness#readme"
 }
