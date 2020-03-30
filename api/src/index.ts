@@ -1,16 +1,14 @@
 import express from 'express';
 import config from './config';
 import Logger from './loaders/logger';
-import mongoose from "./loaders/mongoose";
-
-
+import loaders from './loaders';
 const startServer = async () => {
     const app = express();
 
-    await require('./loaders').default({ expressApp: app });
+    await loaders({expressApp: app});
 
     app.listen(config.port, err => {
-        if(err) {
+        if (err) {
             Logger.error(err);
             process.exit(1);
             return;

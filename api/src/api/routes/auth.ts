@@ -12,12 +12,12 @@ export default (app: Router) => {
         middlewares.validateSignUpRequest,
         middlewares.validateSameEmailDoesntExist,
         async (req: Request, res: Response, next: NextFunction) => {
-            const logger = Container.get('logger');
+            const Logger = Container.get('logger');
             try{
                 const authServiceInstance = Container.get(AuthService);
                 const  {user, token} = await authServiceInstance.SignUp(req.body as IUserInputDTO);
             } catch (e) {
-                logger.error('🔥 error: %o', e);
+                Logger.error('🔥 error: %o', e);
                 return next(e);
             }
         }
