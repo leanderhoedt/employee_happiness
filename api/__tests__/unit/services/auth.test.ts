@@ -21,7 +21,7 @@ afterAll(async (done) => {
 describe('Auth service', () => {
     describe('SignUp', () => {
 
-        test('should create user record', async () => {
+        it('should create a user record', async () => {
             const userInput = {
                 firstName: 'User',
                 lastName: 'Unit Test',

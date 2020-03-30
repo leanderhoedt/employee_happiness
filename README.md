@@ -4,6 +4,7 @@ Prerequisites
 * Node 10+
 * Python 2.x (needed for argon2)
 * npm install -g node-gyp (needed for argon2)
+* npm install in /api & /frontend (please use npm, because yarn has an issue that is probably windows related)
 
 First, run the development server:
 
@@ -44,3 +45,8 @@ It’s a JavaScript runtime environment built on Google Chrome’s V8 engine, an
 * Scalable/performance
 * Share business logic in backend and frontend
 * Large open source community
+
+#Testing
+I used Jest for testing on the same mongo database I used for the demo.
+I prefer to write tests for services & middlewares rather than the controller itself, maybe I'm wrong?
+
