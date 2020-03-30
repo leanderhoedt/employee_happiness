@@ -24,7 +24,7 @@ export default async ({expressApp}) => {
     const voteModel = {
         name: 'voteModel',
         model: require('../models/vote').default,
-    }
+    };
 
     // It returns the agenda instance because it's needed in the subsequent loaders
     const {  } = await dependencyInjectorLoader({
@@ -36,4 +36,8 @@ export default async ({expressApp}) => {
     });
     await expressLoader({app: expressApp});
     Logger.info('✌️ Express loaded');
+
+    return {
+        mongoConnection,
+    }
 }

@@ -1,6 +1,7 @@
 import express from 'express';
 import config from './config';
 import Logger from './loaders/logger';
+import mongoose from "./loaders/mongoose";
 
 
 const startServer = async () => {
