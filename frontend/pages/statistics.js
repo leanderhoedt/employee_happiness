@@ -1,24 +1,14 @@
-import React, {Component} from 'react';
+import React from "react";
 import Layout from "../components/Layout";
-import TrumpFaces from "../components/TrumpFaces";
-import styled from 'styled-components';
 import {fetchAuth} from "../services/Fetch.service";
-import Router from 'next/router';
 
-const Home = ({user}) => {
+const Statistics = ({user}) => {
     return (
         <Layout user={user}>
-            <Header>What mood today?</Header>
-            <TrumpFaces/>
         </Layout>
     )
 };
-
-const Header = styled.h1`
-text-align: center;
-`;
-
-Home.getInitialProps = async ctx => {
+Statistics.getInitialProps = async ctx => {
     try {
         const {data} = await fetchAuth(ctx).get('/users/me');
 
@@ -36,4 +26,4 @@ Home.getInitialProps = async ctx => {
         }
     }
 };
-export default Home;
+export default Statistics;
