@@ -6,7 +6,6 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const devProxy = {
     '/api': {
         target: 'http://localhost:3001',
-        pathRewrite: { '^/api': '/' },
         changeOrigin: true,
     },
 };

@@ -53,3 +53,16 @@ I prefer to write tests for services & middlewares rather than the controller it
 #TypeScript
 I implemented the backend in TypeScript, to just try it.
 The front-end is implemented in JavaScript, because it types faster :)
+
+
+#Authentication 
+
+Used JWT and store token in cookie (even though this is not the most ideal solution)
+Only used access_token for now, and set it large enough to work
+
+
+#Improvements
+* Error page
+* Create Swagger
+* Error handling
+* Extend tests (api, middlewares, ...)

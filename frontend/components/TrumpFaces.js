@@ -28,6 +28,7 @@ const TrumpImg = styled.img`
 border-radius: 50%;
 width: 200px;
 margin: 0 30px;
+cursor: pointer;
 `;
 
 export default TrumpFaces;

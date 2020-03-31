@@ -16,6 +16,7 @@
     "formik": "^2.1.4",
     "http-proxy-middleware": "^1.0.3",
     "next": "9.3.1",
+    "next-cookies": "^2.0.3",
     "next-images": "^1.4.0",
     "react": "16.13.1",
     "react-cookie": "^4.0.3",

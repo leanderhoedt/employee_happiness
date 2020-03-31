@@ -17,12 +17,6 @@ const startServer = async () => {
     });
 
     Logger.info(`Server listening on port: ${config.port}`);
-    Logger.info(`Available routes:`);
-    app._router.stack.forEach(r=> {
-        if(r.route && r.route.path){
-            Logger.info(r.route.path);
-        }
-    });
 };
 
 export default startServer();

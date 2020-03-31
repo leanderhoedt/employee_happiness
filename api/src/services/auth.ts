@@ -1,4 +1,4 @@
-import { Service, Inject } from 'typedi';
+import {Service, Inject} from 'typedi';
 import argon2 from 'argon2';
 import {randomBytes} from 'crypto';
 import jwt from 'jsonwebtoken';
@@ -7,16 +7,14 @@ import {IUser, IUserInputDTO} from "../interfaces/IUser";
 
 @Service()
 export default class AuthService {
-    constructor(
-        @Inject('userModel') private userModel,
-        @Inject('logger') private logger,
-    ) {
-    }
-    public async SignUp(userInputDTO: IUserInputDTO): Promise<{user:IUser; token: string}>{
+    @Inject('userModel') private userModel;
+    @Inject('logger') private logger;
+
+    public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser; token: string }> {
         try {
             const salt = randomBytes(32);
             this.logger.silly('Hashing password');
-            const hashedPassword = await argon2.hash(userInputDTO.password,{salt});
+            const hashedPassword = await argon2.hash(userInputDTO.password, {salt});
             this.logger.silly('Creating user db record');
             const userRecord = await this.userModel.create({
                 ...userInputDTO,
@@ -32,15 +30,16 @@ export default class AuthService {
             const user = userRecord.toObject();
             Reflect.deleteProperty(user, 'password');
             Reflect.deleteProperty(user, 'salt');
-            return { user, token };
+            return {user, token};
         } catch (e) {
-            this.logger.error(e);
+            console.log(e)
+            // this.logger.error(e);
         }
     }
 
     public async SignIn(email: string, password: string): Promise<{ user: IUser; token: string }> {
-        const userRecord  = await this.userModel.findOne({email});
-        if(!userRecord) {
+        const userRecord = await this.userModel.findOne({email});
+        if (!userRecord) {
             throw new Error('User not registered');
         }
         /**
@@ -57,7 +56,7 @@ export default class AuthService {
             Reflect.deleteProperty(user, 'password');
             Reflect.deleteProperty(user, 'salt');
 
-            return { user, token };
+            return {user, token};
         } else {
             throw new Error('Invalid Password');
         }

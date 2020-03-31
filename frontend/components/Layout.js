@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -102,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Layout = ({children}) => {
+const Layout = ({children, user = {}, errorCode}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -147,6 +148,10 @@ const Layout = ({children}) => {
                         <ChevronLeftIcon/>
                     </IconButton>
                 </div>
+                <Divider/>
+                <h3 style={{marginLeft: 20}}>
+                    {`${user.firstName} ${user.lastName}`}
+                </h3>
                 <Divider/>
                 <List>
                     <Link href={"/"}>

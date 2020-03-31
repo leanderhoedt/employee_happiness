@@ -33,27 +33,16 @@ const SignUp = () => {
     const classes = useStyles();
     const handleSubmit = async (values, actions) => {
         actions.setSubmitting(true);
-        axios.post('/api/signup', values)
+
+        axios.post('http://localhost:3001/api/auth/signup', values)
             .then(value => {
                 actions.setSubmitting(false);
-                // try login immediately?
-                axios.post('/api/auth/signin', {
-                    email: values.email,
-                    password: values.password
-                })
-                    .then(res => {
-                        tokenService.saveToken(res.token);
-                        Router.push("/");
-                    })
-                    .catch(reason => {
-                        Router.push("/signin");
-                        alert(reason);
-                    })
+                Router.push("/signin");
             })
             .catch(reason => {
                 actions.setSubmitting(false);
-                alert(reason)
-            })
+                console.log(reason)
+            });
     };
     return (
         <Container component="main" maxWidth="xs">

@@ -9,10 +9,10 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import axios from "axios";
 import TokenService from "../services/Token.service";
 import Copyright from "../components/Copyright";
 import Router from 'next/router'
+import {fetchAuth} from "../services/Fetch.service";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,8 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
     const classes = useStyles();
     const onLoginClick = async (credentials) => {
-        console.log("Login called");
-        const response = await axios.get('/api/auth', credentials);
+        const response = await fetchAuth().post('/auth/signin', credentials);
         const token = response.data.token;
         const tokenService = new TokenService();
         await tokenService.saveToken(token);

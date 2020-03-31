@@ -1,29 +1,25 @@
 import axios from 'axios';
-import Router from 'next/router'
 import TokenService from "./Token.service";
 
-const fetchAuth = axios.create({
-    headers:{
-        'Content-Type':'application/json',
-        'Authorization': `Bearer ${TokenService.getToken()}`
-    }
-});
+const tokenService = new TokenService();
 
-fetchAuth.interceptors.response.use((response) => {
-    // Return a successful response back to the calling service
-    return response;
-}, (error => {
+const fetchAuth = (ctx) => {
+    console.log(tokenService.getToken(ctx));
+    let axiosInstance = axios.create({
+        baseURL: 'http://localhost:3001/api',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${tokenService.getToken(ctx)}`
+        }
+    });
+    axiosInstance.interceptors.response.use((response) => {
+        // Return a successful response back to the calling service
+        return response;
+    }, (error => {
+        return Promise.reject(error.message);
+    }));
+    return axiosInstance;
+}
 
-    // Return any error which is not due to authentication back to the calling service
-    if (error.response.status !== 401) {
-        return new Promise((resolve, reject) => {
-            reject(error);
-        });
-    }
-    if (error.response.status === 401) {
-        Router.push("/");
-    }
-
-}));
 
 export {fetchAuth};
