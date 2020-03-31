@@ -50,3 +50,6 @@ It’s a JavaScript runtime environment built on Google Chrome’s V8 engine, an
 I used Jest for testing on the same mongo database I used for the demo.
 I prefer to write tests for services & middlewares rather than the controller itself, maybe I'm wrong?
 
+#TypeScript
+I implemented the backend in TypeScript, to just try it.
+The front-end is implemented in JavaScript, because it types faster :)

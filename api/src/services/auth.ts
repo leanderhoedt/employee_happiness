@@ -63,7 +63,6 @@ export default class AuthService {
         }
     }
 
-
     private generateToken(user) {
         const today = new Date();
         const exp = new Date(today);
