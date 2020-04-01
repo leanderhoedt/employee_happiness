@@ -16,9 +16,9 @@ const TrumpFaces = () => {
         console.log(result);
     };
     return <TrumpContainer>
-        <TrumpImg src={TrumpHappy} onClick={() => vote('happy')}/>
-        <TrumpImg src={TrumpNeutral} onClick={() => vote('neutral')}/>
-        <TrumpImg src={TrumpSad} onClick={() => vote('sad')}/>
+        <TrumpImg src={TrumpHappy} onClick={() => vote(2)}/>
+        <TrumpImg src={TrumpNeutral} onClick={() => vote(1)}/>
+        <TrumpImg src={TrumpSad} onClick={() => vote(0)}/>
     </TrumpContainer>
 };
 

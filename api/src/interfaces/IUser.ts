@@ -1,3 +1,5 @@
+import {IVote} from "./IVote";
+
 export interface IUser {
     _id: string;
     firstName: string;
@@ -5,6 +7,7 @@ export interface IUser {
     email: string;
     password: string;
     salt: string;
+    votes: IVote[]
 }
 
 export interface IUserInputDTO {
@@ -12,4 +15,5 @@ export interface IUserInputDTO {
     lastName: string;
     email: string;
     password: string;
+    role?: string;
 }

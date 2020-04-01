@@ -7,9 +7,13 @@ import {IUser, IUserInputDTO} from "../interfaces/IUser";
 
 @Service()
 export default class AuthService {
-    @Inject('userModel') private userModel;
-    @Inject('logger') private logger;
-
+    constructor(
+        @Inject('userModel') private userModel,
+        @Inject('logger') private logger,
+    ) {
+        this.logger = logger;
+        this.userModel = userModel;
+    }
     public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser; token: string }> {
         try {
             const salt = randomBytes(32);
@@ -30,10 +34,10 @@ export default class AuthService {
             const user = userRecord.toObject();
             Reflect.deleteProperty(user, 'password');
             Reflect.deleteProperty(user, 'salt');
+            console.log('user created')
             return {user, token};
         } catch (e) {
-            console.log(e)
-            // this.logger.error(e);
+            this.logger.error(e);
         }
     }
 

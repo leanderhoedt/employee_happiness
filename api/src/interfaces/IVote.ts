@@ -1,10 +1,11 @@
 export interface IVote {
     _id: string;
-    mood: string;
+    mood: number;
     date: Date;
     user_id: string;
 }
 
 export interface IVoteInputDTO {
-    mood: string;
+    mood: number;
+    date?: Date;
 }

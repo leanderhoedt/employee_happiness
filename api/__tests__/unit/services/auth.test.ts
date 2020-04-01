@@ -5,23 +5,18 @@ import loaders from '../../../src/loaders';
 
 let db = null;
 
-beforeAll(async (done) => {
-    const expressApp = express();
-    const {mongoConnection} = await loaders({expressApp});
-    db = mongoConnection;
-    done();
-
-});
-afterAll(async (done) => {
-    const UserModel = Container.get('userModel');
-    await UserModel.deleteMany({email: "test@example.com"});
-    db.connection.close(() => done());
-});
 
 describe('Auth service', () => {
+    beforeAll(async (done) => {
+        const expressApp = express();
+        const {mongoConnection} = await loaders({expressApp});
+        db = mongoConnection;
+        done();
+
+    });
     describe('SignUp', () => {
 
-        it('should create a user record', async () => {
+        it('should create a user record', async (done) => {
             const userInput = {
                 firstName: 'User',
                 lastName: 'Unit Test',
@@ -41,11 +36,12 @@ describe('Auth service', () => {
             expect(user.password).not.toBeDefined();
             expect(user.salt).not.toBeDefined();
             expect(token).toBeDefined();
+            done();
         });
     });
 
     describe('SignIn', () => {
-        it('should be able to login', async () => {
+        it('should be able to login', async (done) => {
             const UserModel = Container.get('userModel');
             const Logger = Container.get('logger');
             const authService = new AuthService(UserModel, Logger);
@@ -58,14 +54,20 @@ describe('Auth service', () => {
             expect(user.password).not.toBeDefined();
             expect(user.salt).not.toBeDefined();
             expect(token).toBeDefined();
-
+            done();
         });
-        it('should throw an error when email was not registered yet', async () => {
+        it('should throw an error when email was not registered yet', async (done) => {
             const UserModel = Container.get('userModel');
             const Logger = Container.get('logger');
             const authService = new AuthService(UserModel, Logger);
             await expect(authService.SignIn('unexistingemail@unexisting.com', 'bliepbloep')).rejects.toThrow();
-
+            done();
         });
-    })
+    });
+    afterAll(async (done) => {
+        const UserModel = Container.get('userModel');
+        await UserModel.deleteMany({});
+        await db.disconnect();
+        done();
+    });
 });

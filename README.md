@@ -61,8 +61,10 @@ Used JWT and store token in cookie (even though this is not the most ideal solut
 Only used access_token for now, and set it large enough to work
 
 
-#Improvements
+#Future Improvements 
 * Error page
 * Create Swagger
 * Error handling
 * Extend tests (api, middlewares, ...)
+* Dockerize each component (ui, api, mongo)
+* Remove user details when retrieving votes

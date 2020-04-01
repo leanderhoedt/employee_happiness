@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 const Vote = new mongoose.Schema(
     {
         mood: {
-            type: String,
+            type: Number,
             required: [true, "Please provide mood"]
         },
 

@@ -3,10 +3,12 @@ import isAuth from './isAuth';
 import validateSignUpRequest from './validateSignUpRequest';
 import validateLoginRequest from './validateLoginRequest';
 import validateSameEmailDoesntExist from './validateSameEmailDoesntExist';
+import isManager from './isManager';
 
 export default {
-    attachCurrentUser,
     isAuth,
+    isManager,
+    attachCurrentUser,
     validateSignUpRequest,
     validateLoginRequest,
     validateSameEmailDoesntExist

@@ -1,28 +1,31 @@
-import React from "react";
+import React from 'react';
 import Layout from "../components/Layout";
 import {fetchAuth} from "../services/Fetch.service";
+import Chart from '../components/Chart';
 
-const Statistics = ({user}) => {
+const Statistics = ({user, votes}) => {
+
     return (
         <Layout user={user}>
+            <Chart/>
         </Layout>
     )
 };
+
 Statistics.getInitialProps = async ctx => {
     try {
         const {data} = await fetchAuth(ctx).get('/users/me');
-
         return {
-            user: data.user || {}
+            user: data.user || {},
         };
     } catch (err) {
-        if (ctx.req) {
+        if (ctx && ctx.req) {
             // If `ctx.req` is available it means we are on the server.
             ctx.res.writeHead(302, {Location: '/signin'})
             ctx.res.end()
         } else {
             // This should only happen on client.
-            Router.push('/signin')
+            Router.push('/signin');
         }
     }
 };
