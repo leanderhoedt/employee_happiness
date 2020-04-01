@@ -32,14 +32,29 @@ export default (app: Router) => {
         middlewares.isAuth,
         middlewares.isManager,
         async (req: Request, res: Response, next: NextFunction) => {
-            if (!req.isManager) {
-                return res.status(403);
-            }
             const logger = Container.get('logger');
-            logger.debug('Calling vote endpoint with body: %o', req.body)
+            logger.debug('Calling statistics endpoint with body: %o', req.body)
             try {
                 const voteServiceInstance = Container.get(VoteService);
                 const {votes} = await voteServiceInstance.Votes(req.body.date as Date);
+                return res.status(200).json({votes});
+            } catch (e) {
+                logger.error('🔥 error: %o', e);
+                return next(e);
+            }
+        }
+    );
+
+    route.get(
+        '/:days',
+        middlewares.isAuth,
+        middlewares.isManager,
+        async (req: Request, res: Response, next: NextFunction) => {
+            const logger = Container.get('logger');
+            logger.debug('Calling vote endpoint');
+            try {
+                const voteServiceInstance = Container.get(VoteService);
+                const {votes} = await voteServiceInstance.VotesByDays(req.params.days as number);
                 return res.status(200).json({votes});
             } catch (e) {
                 logger.error('🔥 error: %o', e);

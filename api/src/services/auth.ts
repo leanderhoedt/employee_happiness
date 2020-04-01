@@ -34,7 +34,7 @@ export default class AuthService {
             const user = userRecord.toObject();
             Reflect.deleteProperty(user, 'password');
             Reflect.deleteProperty(user, 'salt');
-            console.log('user created')
+            this.logger.silly('user created');
             return {user, token};
         } catch (e) {
             this.logger.error(e);

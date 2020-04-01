@@ -2,7 +2,7 @@ import theme from '../theme';
 const BarOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    legend: { display: true },
+    legend: { display: false },
     cornerRadius: 20,
     tooltips: {
         enabled: true,
@@ -19,6 +19,22 @@ const BarOptions = {
     scales: {
         xAxes: [
             {
+                type: 'time',
+                time: {
+                    unit: 'day',
+                    unitStepSize: 1,
+                    displayFormats: {
+                        'millisecond': 'MMM DD',
+                        'second': 'MMM DD',
+                        'minute': 'MMM DD',
+                        'hour': 'MMM DD',
+                        'day': 'MMM DD',
+                        'week': 'MMM DD',
+                        'month': 'MMM DD',
+                        'quarter': 'MMM DD',
+                        'year': 'MMM DD',
+                    }
+                },
                 barThickness: 12,
                 maxBarThickness: 10,
                 barPercentage: 0.5,

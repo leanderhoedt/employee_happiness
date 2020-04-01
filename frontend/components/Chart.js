@@ -26,6 +26,14 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'flex-end'
     }
 }));
+const getRandomColor = () => {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
 
 const getData = (votes, period) => {
     const date = moment().add(-1, period);
@@ -35,18 +43,19 @@ const getData = (votes, period) => {
 
     let labels = [];
 
-    for (let i = 1; i < amountOfDays; i++) {
+    for (let i = amountOfDays; i > 1; i--) {
         labels.push(today.add(-i, 'days').format("D MMM"));
     }
-    const datasets = votes.map(u => {
-        return {
-            label: u.firstName,
-            data: u.votes.map(v => v.mood)
-        }
-    });
+
     return {
-        labels,
-        datasets,
+        backgroundColor: getRandomColor(),
+        datasets: [{
+            data: votes.map(vote => ({
+                x: vote.date,
+                y: vote.mood,
+            })),
+            backgroundColor: getRandomColor(),
+        }],
     }
 };
 
@@ -60,14 +69,19 @@ const Chart = ({className, ...rest}) => {
     };
     const periods = ['days', 'weeks', 'months'];
 
-    const [period, setPeriod] = useState('days');
+    const [period, setPeriod] = useState('weeks');
     const [anchorEl, setAnchorEl] = useState(null);
     const [votes, setVotes] = useState([]);
 
     useEffect(() => {
-        const getResponse = async () => await fetchAuth().post('/vote/statistics', {date: moment().add(-1, period)});
+        // const getResponse = async () => await fetchAuth().post('/vote/statistics', {date: moment().add(-1, period)});
+        const compareDate = moment().add(-1, period);
+        const amountOfDays = moment().diff(compareDate, 'days');
+        const getResponse = async () => await fetchAuth().get(`/vote/${amountOfDays}`, {date: moment().add(-1, period)});
         getResponse().then(result => {
             setVotes(result.data.votes);
+        }).catch(e => {
+            alert(e);
         })
     }, [period]);
 

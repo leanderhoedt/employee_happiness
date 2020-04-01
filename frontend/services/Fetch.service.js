@@ -4,7 +4,7 @@ import TokenService from "./Token.service";
 const tokenService = new TokenService();
 
 const fetchAuth = (ctx) => {
-    console.log(tokenService.getToken(ctx));
+
     let axiosInstance = axios.create({
         baseURL: 'http://localhost:3001/api',
         headers: {

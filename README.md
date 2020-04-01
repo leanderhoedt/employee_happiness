@@ -68,3 +68,4 @@ Only used access_token for now, and set it large enough to work
 * Extend tests (api, middlewares, ...)
 * Dockerize each component (ui, api, mongo)
 * Remove user details when retrieving votes
+* Security breaches

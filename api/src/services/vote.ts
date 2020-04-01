@@ -36,12 +36,12 @@ export default class VoteService {
         const user = userRecord.toObject();
         Reflect.deleteProperty(user, 'password');
         Reflect.deleteProperty(user, 'salt');
+        this.logger.silly('vote created');
         return {user, vote};
     }
 
     public async Votes(date: Date): Promise<{ votes: IUser[] }> {
         this.logger.silly('Retrieving votes');
-        console.log(date);
 
         const votes = await this.userModel.aggregate([
             {
@@ -56,8 +56,8 @@ export default class VoteService {
                                         {$eq: ["$user_id", "$$user_id"]}
                                     ]
                                 },
-                                date:{
-                                    $gte: date
+                                date: {
+                                    $gte: new Date(date)
                                 }
                             }
                         },
@@ -73,6 +73,18 @@ export default class VoteService {
         return {votes}
     }
 
+    public async VotesByDays(days: number): Promise<{ votes: IVote[] }> {
+        const today = new Date();
+        const fromDate = new Date(today);
+        fromDate.setDate(today.getDate() + -days);
+
+        const votes = await this.voteModel.find({
+            date: {$gte: fromDate}
+        });
+
+        return {votes};
+    }
+
     public async GenerateVotes(): Promise<{ votes: IVote[] }> {
         const UserModel = Container.get("userModel");
         const Logger = Container.get('logger');
@@ -82,7 +94,7 @@ export default class VoteService {
             firstName: 'Tester1',
             lastName: 'Tester1',
             email: 'tester1@testerke.com',
-            password: 'test'
+            password: 'test1'
         });
         const result2 = await authService.SignUp({
             firstName: 'Tester2',
@@ -102,7 +114,7 @@ export default class VoteService {
 
         for (let i = 0; i < 40; i++) {
             let previousDate = new Date(today);
-            previousDate.setDate(today.getDate()-i);
+            previousDate.setDate(today.getDate() - i);
             insertVotes.push({
                 mood: Math.floor(Math.random() * 3),
                 date: previousDate,
