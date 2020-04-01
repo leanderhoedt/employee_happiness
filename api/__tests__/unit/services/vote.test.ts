@@ -10,9 +10,7 @@ beforeAll(async (done) => {
     const expressApp = express();
     const {mongoConnection} = await loaders({expressApp});
     db = mongoConnection;
-    const UserModel = Container.get('userModel');
-    const Logger = Container.get('logger');
-    const authService = new AuthService(UserModel, Logger);
+    const authService = new AuthService();
     const userInput = {
         firstName: 'User',
         lastName: 'Unit Test',
@@ -34,11 +32,8 @@ describe('Vote service', () => {
     describe('Vote', () => {
 
         it('should be able to vote', async () => {
-            const VoteModel = Container.get('voteModel');
-            const UserModel = Container.get('userModel');
-            const Logger = Container.get('logger');
 
-            const voteService = new VoteService(UserModel, VoteModel, Logger);
+            const voteService = new VoteService();
             const voteInput = {
                 mood: 'positive',
             };

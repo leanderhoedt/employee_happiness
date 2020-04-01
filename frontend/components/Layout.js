@@ -19,6 +19,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Link from 'next/link';
+import TokenService from "../services/Token.service";
+import Router from "next/router";
 
 const drawerWidth = 240;
 
@@ -113,6 +115,12 @@ const Layout = ({children, user = {}, errorCode}) => {
     };
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+    const handleLogout = () => {
+        let tokenService = new TokenService();
+        tokenService.removeToken();
+        Router.push("/signin")
+    };
+
     return (
         <div className={classes.root}>
             <CssBaseline/>
@@ -130,7 +138,7 @@ const Layout = ({children, user = {}, errorCode}) => {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Employee happiness
                     </Typography>
-                    <IconButton color="inherit">
+                    <IconButton color="inherit" onClick={handleLogout}>
                         <ExitToApp/>
                     </IconButton>
                 </Toolbar>
