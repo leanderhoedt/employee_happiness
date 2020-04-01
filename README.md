@@ -6,11 +6,32 @@ Prerequisites
 * npm install -g node-gyp (needed for argon2)
 * npm install in /api & /frontend (please use npm, because yarn has an issue that is probably windows related)
 
-First, run the development server:
-
+First install everything:
 ```bash
+cd api
+npm i
+cd ..
+cd frontend
+npm i
+```
+
+Run the development server(s):
+```bash
+cd api
+npm run dev
+cd ..
+cd frontend
 npm run dev
 ```
+
+Users & votes are generated at startup (if you don't want this, you can comment the logic in api/index.ts)
+Users created (user:pass)
+* tester1@testerke.com:test1 => developer
+* tester2@testerke.com:test2 => developer
+* tester3@testerke.com:test3 => manager
+
+Developer & managers can vote for the mood of the day
+Only a manager can see the statistics
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
