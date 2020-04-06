@@ -91,3 +91,4 @@ Only used access_token for now, and set it large enough to work
 * Remove user details when retrieving votes
 * Security breaches
 * module aliasing
+* Chart: work with averages
