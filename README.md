@@ -82,7 +82,7 @@ Used JWT and store token in cookie (even though this is not the most ideal solut
 Only used access_token for now, and set it large enough to work
 
 
-#Future Improvements 
+# Future Improvements 
 * Error page
 * Create Swagger
 * Error handling
@@ -90,3 +90,4 @@ Only used access_token for now, and set it large enough to work
 * Dockerize each component (ui, api, mongo)
 * Remove user details when retrieving votes
 * Security breaches
+* module aliasing
