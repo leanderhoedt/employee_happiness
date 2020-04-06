@@ -28,8 +28,8 @@ Home.getInitialProps = async ctx => {
     } catch (err) {
         if (ctx.req) {
             // If `ctx.req` is available it means we are on the server.
-            ctx.res.writeHead(302, {Location: '/signin'})
-            ctx.res.end()
+            ctx.res.writeHead(302, {Location: '/signin'});
+            ctx.res.end();
         } else {
             // This should only happen on client.
             Router.push('/signin')
