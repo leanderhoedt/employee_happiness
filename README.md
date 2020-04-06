@@ -57,7 +57,7 @@ A JavaScript library used to create beautiful and interactive user interfaces de
 * Why would anyone use jQuery nowadays?
 * Write React-Native application on top of your business logic of react (if you want a native app instead of PWA ofcourse)
 * Angular because bluuh
-* VueJS would be great eather, but not experienced enough
+* VueJS would be great too, but not experienced enough
 
 #### NodeJS
 It’s a JavaScript runtime environment built on Google Chrome’s V8 engine, and it compiles js at the runtime.
